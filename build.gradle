@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "${spring_boot_version}"
+}
+
+group = 'com.mgumieniak'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // BOM
+    implementation platform("org.springframework.boot:spring-boot-dependencies:${spring_boot_version}")
+    implementation platform("org.testcontainers:testcontainers-bom:${testcontainers_version}")
+    implementation(platform("software.amazon.awssdk:bom:2.17.243"))
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    compileOnly "org.projectlombok:lombok:${lombok_version}"
+    annotationProcessor "org.projectlombok:lombok:${lombok_version}"
+    implementation "com.github.spotbugs:spotbugs-annotations:${spotbugs_version}"
+
+    //aws
+    implementation("software.amazon.awssdk:iam")
+    implementation("software.amazon.awssdk:s3")
+    implementation("software.amazon.awssdk:sqs")
+    implementation("software.amazon.awssdk:sns")
+    implementation("software.amazon.awssdk:sts")
+
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testCompileOnly "org.projectlombok:lombok:${lombok_version}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombok_version}"
+    testImplementation "org.assertj:assertj-core:${assertj_version}"
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
