@@ -1,7 +1,6 @@
 variable "aws_account_number" {}
 variable "aws_account_client" {}
 variable "aws_account_client_role" {}
-variable "sqs_fifo_name" {}
 
 resource "aws_kms_key" "mgumieniak_sqs_fifo_key" {
   description             = "KMS for sqs fifo"

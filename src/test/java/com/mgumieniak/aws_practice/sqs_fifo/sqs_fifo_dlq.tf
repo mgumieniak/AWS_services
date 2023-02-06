@@ -1,6 +1,3 @@
-variable "sqs_fifo_dlq_name" {}
-
-
 resource "aws_sqs_queue" "sqs_fifo_dlq" {
   name                      = var.sqs_fifo_dlq_name
   fifo_queue                = true

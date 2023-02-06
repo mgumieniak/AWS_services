@@ -47,7 +47,7 @@ class SQSTest {
         outboxEventDb.save(1L, new OutboxEvent("USER_CREATED"));
 
 
-        // ... in other thread check cycling if there are some events
+        // ... in other thread check cycling if there are available events to process
         val eventsToSend = outboxEventDb.findAll();
         val batchRequestEntries = eventsToSend.stream()
                 .map(event -> SendMessageBatchRequestEntry.builder()
