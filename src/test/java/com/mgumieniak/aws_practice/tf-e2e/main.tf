@@ -13,3 +13,7 @@ module "sqs_fifo" {
   aws_account_client      = var.aws_account_client
   aws_account_client_role = var.aws_account_client_role
 }
+
+module "network" {
+  source = "../network"
+}

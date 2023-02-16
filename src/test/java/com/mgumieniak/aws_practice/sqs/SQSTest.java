@@ -28,7 +28,6 @@ class SQSTest {
 
     @Test
     @SneakyThrows
-        // process + produce
     void atMostOnceDelivery() {
         usersDb.save(1L, new User("John"));
         val msg = SendMessageRequest.builder()
@@ -40,7 +39,6 @@ class SQSTest {
 
     @Test
     @SneakyThrows
-        // process + produce
     void atLeastOnceDelivery() {
         // Both operation should be in transaction
         usersDb.save(1L, new User("John"));
@@ -51,6 +49,7 @@ class SQSTest {
         val eventsToSend = outboxEventDb.findAll();
         val batchRequestEntries = eventsToSend.stream()
                 .map(event -> SendMessageBatchRequestEntry.builder()
+                        .id("1")
                         .messageBody(event.json)
                         .build())
                 .toList();
